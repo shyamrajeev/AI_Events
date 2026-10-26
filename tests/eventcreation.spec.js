@@ -1,6 +1,7 @@
 import{test,expect} from '@playwright/test'
 import { Login } from '../pages/loginpage.js';
 import {eventcreate} from '../pages/eventcreation.js';
+import * as allure from 'allure-js-commons'
 
 test.describe.serial('Event creation scenarios',()=>
 {
@@ -52,15 +53,17 @@ const login = new Login(page);
    });
    await test.step('verify the validation message is showing',async()=>
    {
-    await expect( page.getByText('Please input a name', { exact: true })).toBeVisible();
-    await expect(page.getByText('Please enter a start and end date', { exact: true })).toBeVisible();
-    await expect(page.getByText('Please input a timezone', { exact: true })).toBeVisible();
+    await expect( page.getByText('Please enter an event name', { exact: true })).toBeVisible();
+    await expect(page.getByText('Please enter a start date', { exact: true })).toBeVisible();
+    await expect(page.getByText('Please enter an end date', { exact: true })).toBeVisible();
+    await expect(page.getByText('Please select a timezone', { exact: true })).toBeVisible();
 
    });
 });
 test('TC_03: Verify the admin is able to create an event',async({page})=>
 {
-const login = new Login(page);
+    const eventName = 'Apple Event';
+    const login = new Login(page);
     const createevent = new eventcreate(page);
   await test.step('Login to the platform',async()=>
    {
@@ -75,16 +78,14 @@ const login = new Login(page);
    {
        await createevent.createnewevent();
    });
-   await test.step('Enter the details',async({page})=>
+   await test.step('Enter the details',async()=>
    {
-       await createevent.fillvalues();
+       await createevent.fillvalues(eventName);
    });
-   await test.step('Click on create event button',async({page})=>
+   await test.step('Click on create event button',async()=>
    {
        await createevent.create_event();
-       await page.getByRole('heading', { name: 'Event Details' }).toBeVisible();
-      await expect(page.getByText(eventname, { exact: true })).toBeVisible();
-    });
-    
+       await expect(page.getByRole('textbox', { name: 'Enter event name' })).toHaveValue(eventName);
+   });
    });
 });

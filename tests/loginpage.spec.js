@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../pages/loginpage.js';
+import * as allure from 'allure-js-commons'
 
 
 test.describe.serial('Login page tests', () => {
