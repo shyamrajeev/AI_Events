@@ -23,9 +23,9 @@ export class eventcreate
     {
         await this.createevent_button.click();
     }
-    async fillvalues()
+    async fillvalues(eventName)
     {
-        await this.eventname.fill('Test_Event');
+        await this.eventname.fill(eventName);
         await this.fromemail_address.fill('test');
         await this.startdate.fill('2026-11-01');
         await this.enddate.fill('2026-11-10');

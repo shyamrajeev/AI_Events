@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../pages/loginpage.js';
 import { Lobby } from '../pages/lobbypage.js';
+import * as allure from 'allure-js-commons'
 
 test.describe.serial('Lobby page scenarios', () => {
 
@@ -91,7 +92,7 @@ test.describe.serial('Lobby page scenarios', () => {
 
     test('TC_06: Check whether the user is able to access module settings for a specific event', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Future-Event';
+        const targetEvent = 'Sample_Event';
         const lobby = new Lobby(page, targetEvent);
 
         await test.step('Login to the Event', async () => {

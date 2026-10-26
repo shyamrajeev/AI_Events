@@ -2,12 +2,13 @@ import { test, expect } from '@playwright/test';
 import { Login } from '../pages/loginpage.js';
 import { Lobby } from '../pages/lobbypage.js';
 import {Module_setting} from '../pages/modulesettings.js';
+import * as allure from 'allure-js-commons'
 
 test.describe.serial('Module settings test scenarios',()=>
 {
 test('TC_01: Verify the admin is able to access module settings', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Future-Event';
+        const targetEvent = 'Sample_Event';
         const lobby = new Lobby(page, targetEvent);
 
         await test.step('Login to the Event', async () => {
@@ -24,7 +25,7 @@ test('TC_01: Verify the admin is able to access module settings', async ({ page 
 
     test('TC_02: Verify the admin is able to toggle ON/OFF Core Toggles', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Future-Event';
+        const targetEvent = 'Sample_Event';
         const lobby = new Lobby(page, targetEvent);
         const module = new Module_setting(page);
 
@@ -54,7 +55,7 @@ test('TC_01: Verify the admin is able to access module settings', async ({ page 
     });
 test('TC_03: Verify the admin is able to toggle on the disabled toggles', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Future-Event';
+        const targetEvent = 'Sample_Event';
         const lobby = new Lobby(page, targetEvent);
         const module = new Module_setting(page);
 
@@ -84,7 +85,7 @@ test('TC_03: Verify the admin is able to toggle on the disabled toggles', async 
     
 test('TC_04: Verify the admin is able to toggle OFF the enabled toggles', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Future-Event';
+        const targetEvent = 'Sample_Event';
         const lobby = new Lobby(page, targetEvent);
         const module = new Module_setting(page);
 
