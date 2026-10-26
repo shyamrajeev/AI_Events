@@ -10,7 +10,6 @@ test.describe.serial('Lobby page scenarios', () => {
         await test.step('Login to the Event', async () => {
             await login.loginURL();
             await login.login('sreethin.babu@toobler.com', 'password');
-            await page.waitForURL('**/lobby');
         });
         await test.step('Verify search bar is present', async () => {
             await expect(page.getByPlaceholder('Search Events')).toBeVisible();
@@ -22,8 +21,7 @@ test.describe.serial('Lobby page scenarios', () => {
         const lobby = new Lobby(page);
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
-            await page.waitForURL('**/lobby');
+            await login.login('sreethin.babu@toobler.com', 'password');  
         });
         await test.step('Verify search bar is present', async () => {
             await expect(page.getByPlaceholder('Search Events')).toBeVisible();
@@ -50,7 +48,6 @@ test.describe.serial('Lobby page scenarios', () => {
         await test.step('Login to the Event', async () => {
             await login.loginURL();
             await login.login('sreethin.babu@toobler.com', 'password');
-            await page.waitForURL('**/lobby');
         });
         await test.step('Enter words to search', async () => {
             await lobby.search('No Events');
