@@ -4,7 +4,7 @@ import * as allure from 'allure-js-commons'
 
 
 test.describe.serial('Login page tests', () => {
-    test('TC_02 : Verify the user is abel to access the login page', async ({ page }) => 
+    test('TC_01 : Verify the user is abel to access the login page', async ({ page }) => 
         {
         const login = new Login(page);
 
@@ -26,7 +26,7 @@ test.describe.serial('Login page tests', () => {
         });
 
         await test.step('Enter credentials and click login button', async () => {
-            await login.login('sreethin.babu@toobler.com', 'password123');
+            await login.login_invalidcreds();
         });
         await test.step('verify the validation message', async()=>
         {
@@ -42,11 +42,11 @@ test('TC_03 : Verify the user is able to login using valid crediantials', async 
     });
 
     await test.step('Enter credentials and click login button', async () => {
-        await login.login('sreethin.babu@toobler.com', 'password');
+        await login.login();
     });
     await test.step('verify the user is logged in successfully', async()=>
         {
-            await expect(page).toHaveURL('https://aievents.brandingnext.com/lobby');
+            await expect(page).toHaveURL('/lobby');
         });
 });    
 test('TC_04 : Verify the user is able to access the reset password page', async ({ page }) => {
@@ -77,7 +77,7 @@ test('TC_05 : Verify the user is send reset password link', async ({ page }) => 
         await expect(page.getByRole('heading', { name: 'Reset Password' })).toBeVisible();
     });
     await test.step('Enter the email address and click on send reset link button', async () => {
-        await login.resetpassword('sreethin.babu@toobler.com');
+        await login.resetpassword(process.env.user_name1);
     });
     await test.step('verify the message', async () => {
         await expect(page.getByText( /^Password reset link has been dispatched to .+\. Please check your inbox\.$/)).toBeVisible();

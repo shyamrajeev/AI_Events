@@ -13,7 +13,7 @@ test('TC_01: Verify the admin is able to access module settings', async ({ page 
 
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step(`Click on module settings`, async () => {
@@ -31,7 +31,7 @@ test('TC_01: Verify the admin is able to access module settings', async ({ page 
 
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step(`Click on module settings`, async () => {
@@ -61,7 +61,7 @@ test('TC_03: Verify the admin is able to toggle on the disabled toggles', async 
 
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step(`Click on module settings`, async () => {
@@ -91,7 +91,7 @@ test('TC_04: Verify the admin is able to toggle OFF the enabled toggles', async 
 
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step(`Click on module settings`, async () => {

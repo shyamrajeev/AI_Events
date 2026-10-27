@@ -9,4 +9,5 @@ node_modules/
 /allure-report/
 /allure-results/
 /.github/
-/storageState.json/git
+/storageState.json/
+.env/

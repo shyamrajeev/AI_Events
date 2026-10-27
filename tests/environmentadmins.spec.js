@@ -12,7 +12,7 @@ test.describe.serial('Environment Admin scenarios',()=>
         await test.step('Login to the platform',async()=>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('click on admin option from navigation',async()=>{
             await admin.access_EnvAdmins();
@@ -26,7 +26,7 @@ test.describe.serial('Environment Admin scenarios',()=>
         await test.step('Login to the platform',async()=>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('click on admin option from navigation',async()=>{
             await admin.access_EnvAdmins();
@@ -43,7 +43,7 @@ test.describe.serial('Environment Admin scenarios',()=>
         await test.step('Login to the platform',async()=>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('click on admin option from navigation',async()=>{
             await admin.access_EnvAdmins();
@@ -64,7 +64,7 @@ test.describe.serial('Environment Admin scenarios',()=>
         await test.step('Login to the platform',async()=>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('click on admin option from navigation',async()=>{
             await admin.access_EnvAdmins();
@@ -96,7 +96,7 @@ test.describe.serial('Environment Admin scenarios',()=>
         await test.step('Login to the platform',async()=>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('click on admin option from navigation',async()=>{
             await admin.access_EnvAdmins();
@@ -130,7 +130,7 @@ test.describe.serial('Environment Admin scenarios',()=>
         await test.step('Login to the platform',async()=>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('click on admin option from navigation',async()=>{
             await admin.access_EnvAdmins();
@@ -159,7 +159,7 @@ test.describe.serial('Environment Admin scenarios',()=>
 
         await test.step('Login and open Environment Admins', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
             await admin.access_EnvAdmins();
             await expect(page.getByRole('heading', { name: 'Environment Admins' })).toBeVisible();
         });
@@ -190,7 +190,7 @@ test('TC_08: Verify empty state message is showing when the search returns no re
         await test.step('Login to the platform',async()=>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('click on admin option from navigation',async()=>{
             await admin.access_EnvAdmins();
@@ -211,7 +211,7 @@ test('TC_08: Verify empty state message is showing when the search returns no re
 
         await test.step('Login and open Environment Admins', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
             await admin.access_EnvAdmins();
             await expect(page.getByRole('heading', { name: 'Environment Admins' })).toBeVisible();
         });
@@ -247,7 +247,7 @@ test('TC_08: Verify empty state message is showing when the search returns no re
         await test.step('Login to the platform', async () =>
         {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step('Open Environment Admins', async () =>

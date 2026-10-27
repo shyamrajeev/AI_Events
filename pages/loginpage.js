@@ -13,13 +13,19 @@ export class Login
     }
     async loginURL()
     {
-        await this.page.goto('https://aievents.brandingnext.com/login');
+        await this.page.goto('/');
     }
 
-    async login(email, password)
+    async login()
     {
-         await this.emailaddress.fill(email);
-         await this.password.fill(password);
+         await this.emailaddress.fill(process.env.user_name1);
+         await this.password.fill(process.env.user_password);
+         await this.login_button.click();
+    }
+    async login_invalidcreds()
+    {
+         await this.emailaddress.fill(process.env.user_name1);
+         await this.password.fill('invalid');
          await this.login_button.click();
     }
     async forgotpassword()
