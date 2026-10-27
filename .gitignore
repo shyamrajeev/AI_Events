@@ -10,4 +10,4 @@ node_modules/
 /allure-results/
 /.github/
 /storageState.json/
-.env/
+.env
