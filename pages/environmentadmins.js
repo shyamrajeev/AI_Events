@@ -43,7 +43,7 @@ export class Admin
          {
             await this.admin_firstname.fill('Shyam');
             await this.admin_lastname.fill('Rajeev');
-            await this.admin_email.fill('shyam.rajeev@toobler.com');
+            await this.admin_email.fill(process.env.user_email2);
             await this.fileInput.setInputFiles('/Users/totem/Desktop/AIEvents/Test_Data/profile_avatar.avif');
             await this.admin_job.fill('QA');
             await this.admin_company.fill('Toobler');

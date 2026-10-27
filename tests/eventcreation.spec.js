@@ -13,7 +13,7 @@ test.describe.serial('Event creation scenarios',()=>
   await test.step('Login to the platform',async()=>
    {
         await login.loginURL();
-        await login.login('sreethin.babu@toobler.com', 'password');
+        await login.login();
    });
     await test.step('Verify create new event button is present',async()=>
    {
@@ -37,7 +37,7 @@ const login = new Login(page);
   await test.step('Login to the platform',async()=>
    {
         await login.loginURL();
-        await login.login('sreethin.babu@toobler.com', 'password');
+        await login.login();
    });
     await test.step('Verify create new event button is present',async()=>
    {
@@ -68,7 +68,7 @@ test('TC_03: Verify the admin is able to create an event',async({page})=>
   await test.step('Login to the platform',async()=>
    {
         await login.loginURL();
-        await login.login('sreethin.babu@toobler.com', 'password');
+        await login.login();
    });
     await test.step('Verify create new event button is present',async()=>
    {

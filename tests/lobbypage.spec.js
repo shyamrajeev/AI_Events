@@ -10,7 +10,7 @@ test.describe.serial('Lobby page scenarios', () => {
         const lobby = new Lobby(page);
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('Verify search bar is present', async () => {
             await expect(page.getByPlaceholder('Search Events')).toBeVisible();
@@ -22,7 +22,7 @@ test.describe.serial('Lobby page scenarios', () => {
         const lobby = new Lobby(page);
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');  
+            await login.login();  
         });
         await test.step('Verify search bar is present', async () => {
             await expect(page.getByPlaceholder('Search Events')).toBeVisible();
@@ -48,7 +48,7 @@ test.describe.serial('Lobby page scenarios', () => {
         const lobby = new Lobby(page);
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
         await test.step('Enter words to search', async () => {
             await lobby.search('No Events');
@@ -65,7 +65,7 @@ test.describe.serial('Lobby page scenarios', () => {
 
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step(`Click on enter event button`, async () => {
@@ -81,7 +81,7 @@ test.describe.serial('Lobby page scenarios', () => {
 
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step(`Click on enter admin button`, async () => {
@@ -97,7 +97,7 @@ test.describe.serial('Lobby page scenarios', () => {
 
         await test.step('Login to the Event', async () => {
             await login.loginURL();
-            await login.login('sreethin.babu@toobler.com', 'password');
+            await login.login();
         });
 
         await test.step(`Click on module settings`, async () => {
