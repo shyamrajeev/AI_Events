@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../pages/loginpage.js';
 import { Admin } from '../pages/environmentadmins.js';
+import {EventsData} from '../Test_Data/Eventsdata';
 import * as allure from 'allure-js-commons'
 
 test.describe.serial('Environment Admin scenarios',()=>
@@ -28,11 +29,13 @@ test.describe.serial('Environment Admin scenarios',()=>
             await login.loginURL();
             await login.login();
         });
-        await test.step('click on admin option from navigation',async()=>{
+        await test.step('Click on admin option from navigation' , async()=>
+        {
             await admin.access_EnvAdmins();
             await expect(page.getByRole('heading', { name: 'Environment Admins' })).toBeVisible();
         });
-        await test.step('Verify Add admin button is present',async()=>{
+        await test.step('Verify Add admin button is present',async()=>
+        {
             await expect(page.getByRole('button', { name: '+ Add Admin' })).toBeVisible();
         });    
     });
@@ -119,12 +122,8 @@ test.describe.serial('Environment Admin scenarios',()=>
     });  
     test('TC_06: Verify an environment admin can be added',async({page})=>
     {
-        const adminDetails = {
-            firstName: 'Shyam',
-            lastName: 'Rajeev',
-            email: 'shyam.rajeev@toobler.com',
-        };
-        const fullName = `${adminDetails.firstName} ${adminDetails.lastName}`;
+       
+        const fullName = `${EventsData.create_admin.first_name} ${EventsData.create_admin.last_name}`;
         const login = new Login(page);
         const admin = new Admin(page);
         await test.step('Login to the platform',async()=>
@@ -140,21 +139,20 @@ test.describe.serial('Environment Admin scenarios',()=>
            await admin.addadmin_page();
         }); 
         await test.step('Enter admin details and click on add button',async()=>{
-            await admin.fill_details(adminDetails);
+            await admin.fill_details();
             await admin.add_admin();
         });   
         await test.step('Verify the created admin is visible in the table', async () => {
             const adminRow = page.locator('table.stage-table tbody tr')
-                .filter({ hasText: adminDetails.email });
+                .filter({ hasText: EventsData.create_admin.email});
             await expect(adminRow).toContainText(fullName);
-            await expect(adminRow).toContainText(adminDetails.email);
+            await expect(adminRow).toContainText(EventsData.create_admin.email);
         });
     });
     test('TC_07: Verify admins can be searched by name or email', async ({ page }) =>
     {
         const login = new Login(page);
         const admin = new Admin(page);
-        const searchTerm = 'akhil';
         const adminRows = page.locator('table.stage-table tbody tr');
 
         await test.step('Login and open Environment Admins', async () => {
@@ -164,8 +162,8 @@ test.describe.serial('Environment Admin scenarios',()=>
             await expect(page.getByRole('heading', { name: 'Environment Admins' })).toBeVisible();
         });
 
-        await test.step(`Search by "${searchTerm}" and verify the matching admin`, async () => {
-            await admin.search_admin(searchTerm);
+        await test.step(`Search and verify the matching admin`, async () => {
+            await admin.search_admin();
             await expect(adminRows.first()).toBeVisible();
 
             const rowCount = await adminRows.count();
@@ -203,7 +201,7 @@ test('TC_08: Verify empty state message is showing when the search returns no re
 
     test('TC_09: Verify the edit admin window is accessible and shows correct admin details', async ({ page }) =>
     {
-        const adminName = 'Sreethin Babu E';
+        const adminName = EventsData.admin_editprofile.admin_name;
         const [firstName, ...lastNameParts] = adminName.split(' ');
         const lastName = lastNameParts.join(' ');
         const login = new Login(page);
@@ -226,21 +224,10 @@ test('TC_08: Verify empty state message is showing when the search returns no re
             await expect(admin.admin_lastname).toHaveValue(lastName);
         });
     });
-    test.only('TC_10: Verify updated admin details remain after reopening the edit window', async ({ page }) =>
+    test('TC_10: Verify updated admin details remain after reopening the edit window', async ({ page }) =>
     {
-        const adminDetails = {
-            firstName: 'David',
-            lastName: 'James',
-            email: 'davidjames@gmail.com',
-        };
-        const updatedAdminDetails = {
-            firstName: 'David Updated',
-            lastName: 'James Updated',
-            job: 'QA Updated',
-            company: 'Toobler Updated',
-        };
-        const fullName = `${adminDetails.firstName} ${adminDetails.lastName}`;
-        const updatedFullName = `${updatedAdminDetails.firstName} ${updatedAdminDetails.lastName}`;
+        const fullName = `${EventsData.createadmin_4update.first_name} ${EventsData.createadmin_4update.last_name}`;
+        const updatedFullName = `${EventsData.admin_update.first_name} ${EventsData.admin_update.last_name}`;
         const login = new Login(page);
         const admin = new Admin(page);
 
@@ -259,14 +246,14 @@ test('TC_08: Verify empty state message is showing when the search returns no re
         await test.step('Create the admin to update', async () =>
         {
             await admin.addadmin_page();
-            await admin.admin_detailsbeforeupdate(adminDetails);
+            await admin.admin_detailsbeforeupdate();
             await admin.add_admin();
         });
 
         await test.step('Open the created admin edit window', async () =>
         {
             const adminRow = page.locator('table.stage-table tbody tr')
-                .filter({ hasText: adminDetails.email });
+                .filter({ hasText: EventsData.createadmin_4update.email });
             await expect(adminRow).toContainText(fullName);
             await admin.open_edit_admin(fullName);
             await expect(page.getByRole('heading', { name: 'Edit Admin' })).toBeVisible();
@@ -274,21 +261,21 @@ test('TC_08: Verify empty state message is showing when the search returns no re
 
         await test.step('Update the admin details and save', async () =>
         {
-            await admin.admin_detailsafterupdate(updatedAdminDetails);
+            await admin.admin_detailsafterupdate();
             await admin.admin_update();
         });
 
         await test.step('Reopen the updated admin and verify the saved details', async () =>
         {
             const updatedAdminRow = page.locator('table.stage-table tbody tr')
-                .filter({ hasText: adminDetails.email });
+                .filter({ hasText: EventsData.createadmin_4update.email });
             await expect(updatedAdminRow).toContainText(updatedFullName);
             await admin.open_edit_admin(updatedFullName);
             await expect(page.getByRole('heading', { name: 'Edit Admin' })).toBeVisible();
-            await expect(admin.admin_firstname).toHaveValue(updatedAdminDetails.firstName);
-            await expect(admin.admin_lastname).toHaveValue(updatedAdminDetails.lastName);
-            await expect(admin.admin_job).toHaveValue(updatedAdminDetails.job);
-            await expect(admin.admin_company).toHaveValue(updatedAdminDetails.company);
+            await expect(admin.admin_firstname).toHaveValue(EventsData.admin_update.first_name);
+            await expect(admin.admin_lastname).toHaveValue(EventsData.admin_update.last_name);
+            await expect(admin.admin_job).toHaveValue(EventsData.admin_update.job);
+            await expect(admin.admin_company).toHaveValue(EventsData.admin_update.company);
         });
     });
 
