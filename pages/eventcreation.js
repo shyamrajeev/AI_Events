@@ -1,3 +1,4 @@
+import {EventsData} from '../Test_Data/Eventsdata.js';
 export class eventcreate
 {
     constructor(page)
@@ -23,17 +24,19 @@ export class eventcreate
     {
         await this.createevent_button.click();
     }
-    async fillvalues(eventName)
+    async fillvalues()
     {
-        await this.eventname.fill(eventName);
-        await this.fromemail_address.fill('test');
-        await this.startdate.fill('2026-11-01');
-        await this.enddate.fill('2026-11-10');
+        
+        await this.eventname.fill(EventsData.create_event.eventName);
+        await this.fromemail_address.fill(EventsData.create_event.fromemailaddress);
+        await this.startdate.fill(EventsData.create_event.start_date);
+        await this.enddate.fill(EventsData.create_event.end_date);
         await this.timezone.click();
-        await this.timezone_input.fill('Asia/Kolkata');
-        await this.page.getByText('Asia/Kolkata', { exact: true }).click();
-        await this.fileInput.setInputFiles('/Users/totem/Desktop/AIEvents/Test_Data/event_logo.jpg');
-        await this.event_colour.fill('#3787d7');
+        await this.timezone_input.fill(EventsData.create_event.time_zone);
+        await this.page.getByText(EventsData.create_event.time_zone, { exact: true }).click();
+        await this.fileInput.setInputFiles(EventsData.create_event.logo);
+        await this.event_colour.fill(EventsData.create_event.eventcolour);
+
     }
     async create_event()
     {
