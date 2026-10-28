@@ -173,6 +173,7 @@ test.describe.serial('Environment Admin scenarios',()=>
                     cells.nth(0).innerText(),
                     cells.nth(1).innerText(),
                 ]);
+                const searchTerm = admin.getsearchTerm();
                 const normalizedSearchTerm = searchTerm.toLocaleLowerCase();
                 expect(
                     name.toLocaleLowerCase().includes(normalizedSearchTerm)

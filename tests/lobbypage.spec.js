@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { Login } from '../pages/loginpage.js';
 import { Lobby } from '../pages/lobbypage.js';
 import * as allure from 'allure-js-commons'
+import { EventsData } from '../Test_Data/Eventsdata.js';
 
 test.describe.serial('Lobby page scenarios', () => {
 
@@ -60,7 +61,7 @@ test.describe.serial('Lobby page scenarios', () => {
 
     test('TC_04: Check whether the user is able to enter a specific event', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Future-Event';
+        const targetEvent = EventsData.event_name_lobbyactions.event_name;
         const lobby = new Lobby(page, targetEvent);
 
         await test.step('Login to the Event', async () => {
@@ -69,14 +70,16 @@ test.describe.serial('Lobby page scenarios', () => {
         });
 
         await test.step(`Click on enter event button`, async () => {
-            await lobby.enter_event();
+        
+        
+            await lobby.enter_event(targetEvent);
             await expect(page).toHaveURL(/.*\/event\/.*\/home/);
         });
     });
 
     test('TC_05: Check whether the user is able to enter as admin for a specific event', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Future-Event';
+        const targetEvent = EventsData.event_name_lobbyactions.event_name;
         const lobby = new Lobby(page, targetEvent);
 
         await test.step('Login to the Event', async () => {
@@ -92,7 +95,7 @@ test.describe.serial('Lobby page scenarios', () => {
 
     test('TC_06: Check whether the user is able to access module settings for a specific event', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Sample_Event';
+        const targetEvent = EventsData.event_name_lobbyactions.event_name;
         const lobby = new Lobby(page, targetEvent);
 
         await test.step('Login to the Event', async () => {
@@ -101,7 +104,7 @@ test.describe.serial('Lobby page scenarios', () => {
         });
 
         await test.step(`Click on module settings`, async () => {
-            await lobby.module_setting();
+            await lobby.module_setting(targetEvent);
             await expect(page.getByRole('heading', { name: 'Module Settings' })).toBeVisible();
             await expect(page.locator('p').filter({ hasText: targetEvent })).toBeVisible();
         });
