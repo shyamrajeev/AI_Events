@@ -29,11 +29,18 @@ export class Admin
          {
             await this.addadmin_button.click();
          }
+         getsearchTerm()
+         {
+            const searchTerm = 'Shyam';
+            return searchTerm;
+         }
          async search_admin()
          {
-            const searchTerm = 'akhil';
-            await this.envadmin_searchbox.fill(searchTerm);
+            
+            await this.envadmin_searchbox.fill(this.getsearchTerm());
+            
          }
+         
          async open_edit_admin(adminName)
          {
             const adminRow = this.page.locator('table.stage-table tbody tr').filter({ has: this.page.getByText(adminName, { exact: true }) });

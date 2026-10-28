@@ -3,6 +3,7 @@ import { Login } from '../pages/loginpage.js';
 import {eventcreate} from '../pages/eventcreation.js';
 
 import * as allure from 'allure-js-commons'
+import { EventsData } from '../Test_Data/Eventsdata.js';
 
 test.describe.serial('Event creation scenarios',()=>
 {
@@ -86,7 +87,8 @@ test('TC_03: Verify the admin is able to create an event',async({page})=>
    await test.step('Click on create event button',async()=>
    {
        await createevent.create_event();
-       await expect(page.getByRole('textbox', { name: 'Enter event name' })).toHaveValue(eventName);
+       await page.waitForLoadState('networkidle');
+       await expect(page.getByRole('textbox', { name: 'Enter event name' })).toHaveValue(EventsData.create_event.eventName);
    });
    });
 });
