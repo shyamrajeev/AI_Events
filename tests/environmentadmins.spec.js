@@ -303,5 +303,4 @@ test('TC_08: Verify empty state message is showing when the search returns no re
         await expect(page.locator('form').getByText('User already exists', { exact: true })).toBeVisible();
         });
     });
-
 });
