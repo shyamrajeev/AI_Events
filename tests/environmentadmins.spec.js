@@ -279,7 +279,7 @@ test('TC_08: Verify empty state message is showing when the search returns no re
             await expect(admin.admin_company).toHaveValue(EventsData.admin_update.company);
         });
     });
-    test.only('TC_11: Verify validation message shows on trying to add new admin with existing email',async({page})=>
+    test('TC_11: Verify validation message shows on trying to add new admin with existing email',async({page})=>
     {
         const login = new Login(page);
         const admin = new Admin(page);
