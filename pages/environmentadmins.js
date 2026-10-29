@@ -98,4 +98,15 @@ export class Admin
            {
             await this.update_button.click();
            }
+           async same_adminadd()
+           {
+            await this.admin_firstname.fill(EventsData.addingsameadmin.first_name);
+            await this.admin_lastname.fill(EventsData.addingsameadmin.last_name);
+            await this.admin_email.fill(EventsData.addingsameadmin.email);
+            await this.fileInput.setInputFiles(EventsData.addingsameadmin.dp);
+            await this.admin_job.fill(EventsData.addingsameadmin.job);
+            await this.admin_company.fill(EventsData.addingsameadmin.company);
+            await this.admin_password.fill(EventsData.addingsameadmin.Password);
+         
+           }
 }
