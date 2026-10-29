@@ -279,5 +279,29 @@ test('TC_08: Verify empty state message is showing when the search returns no re
             await expect(admin.admin_company).toHaveValue(EventsData.admin_update.company);
         });
     });
+    test.only('TC_11: Verify validation message shows on trying to add new admin with existing email',async({page})=>
+    {
+        const login = new Login(page);
+        const admin = new Admin(page);
+        await test.step('Login to the platform',async()=>
+        {
+            await login.loginURL();
+            await login.login();
+        });
+        await test.step('click on admin option from navigation',async()=>{
+            await admin.access_EnvAdmins();
+            await expect(page.getByRole('heading', { name: 'Environment Admins' })).toBeVisible();
+        });
+        await test.step('Click on add admin button',async()=>{
+           await admin.addadmin_page();
+        });
+        await test.step('Enter the admin details and click on add button',async()=>{
+           await admin.same_adminadd();
+           await admin.add_admin();
+        });
+        await test.step('Verify the validation message is shown',async()=>{
+        await expect(page.locator('form').getByText('User already exists', { exact: true })).toBeVisible();
+        });
+    });
 
 });

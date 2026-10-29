@@ -49,5 +49,14 @@ export const EventsData = {
     },
     event_name_modulesettings:{
         event_name : 'Phobos Events'
+    },
+    addingsameadmin:{
+        first_name : 'shyam',
+        last_name : 'rajeev',
+        email : 'shyam.rajeev@toobler.com',
+        dp : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
+        job : 'QA',
+        company : 'Toobler',
+        Password : 'password@12345'
     }
 }
