@@ -54,7 +54,7 @@ test('TC_02: Verify add attendee button is present and admin able to access the 
         await test.step('click on add attendee button', async()=>
         {
             await attendee.add_attendeebutton();
-            await expect(page.getByRole('heading', { name: 'Add New Attendee' })).toBeVisible;
+            await expect(page.getByRole('heading', { name: 'Add New Attendee' })).toHaveText('Add New Attendee');
 
         });
     });
@@ -91,8 +91,42 @@ test('TC_02: Verify add attendee button is present and admin able to access the 
             await expect(page.getByText('First name is required', { exact: true })).toBeVisible();
             await expect(page.getByText('Last name is required', { exact: true })).toBeVisible();
             await expect(page.getByText('At least one role must be selected', { exact: true })).toBeVisible();
-            await expect(await page.getByText('Password must be at least 6 characters', { exact: true })).toBeVisible();
+            await expect(page.getByText('Password must be at least 6 characters', { exact: true })).toBeVisible();
+            await expect(page.getByText('Displayed role is required', { exact: true })).toBeVisible();
 
+        });
+    });   
+     test.only('TC_04: Verify validation message is shown for password field if the requirement is not met', async ({ page }) => 
+    {
+        const login = new Login(page);
+        const attendee = new Attendees(page);
+        const targetEvent = EventsData.event_name_lobbyactions.event_name;
+        const lobby = new Lobby(page, targetEvent);
+        await test.step('login to the platform', async () => 
+        {
+            await login.loginURL();
+            await login.login();
+        });
+        await test.step(`Click on enter admin button`, async () => 
+        {
+            await lobby.event_admin();
+        });
+        await test.step('click on users', async()=>
+        {
+            await attendee.access_attendeepage();
+        });
+        await test.step('click on add attendee button', async()=>
+        {
+            await attendee.add_attendeebutton();
+            await expect(page.getByRole('heading', { name: 'Add New Attendee' })).toHaveText('Add New Attendee');
+        }); 
+        await test.step('Enter attendee details',async()=>
+        {
+          await attendee.password_validation();
+        });
+        await test.step('Verify password validation',async()=>
+        {
+          await expect(await page.getByText('Password must be at least 6 characters', { exact: true })).toHaveText('Password must be at least 6 characters');
         });
     });    
 });

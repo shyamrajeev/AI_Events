@@ -57,6 +57,18 @@ export const EventsData = {
         dp : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
         job : 'QA',
         company : 'Toobler',
-        Password : 'password@12345'
+        Password : process.env.admin_createpassword
+    },
+    attendee_psdvalidation:{
+        email : 'binoy.m@gmail.com',
+        first_name :'Binoy',
+        last_name : 'M',
+        job :'Dev',
+        company :'Toobler',
+        roles: ['Delegate', 'Speaker','Sponsor'],
+        display_role :'Speaker',
+        type : 'Online', //In-Person
+        password : 1234
+
     }
 }
