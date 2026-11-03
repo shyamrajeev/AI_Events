@@ -68,7 +68,53 @@ export const EventsData = {
         roles: ['Delegate', 'Speaker','Sponsor'],
         display_role :'Speaker',
         type : 'Online', //In-Person
-        password : 1234
+        password : '1234'
 
+    },
+    add_attendee:{
+        email : 'kiran.k@gmail.com',
+        first_name :'Kiran',
+        last_name : 'Kumar',
+        job :'Dev',
+        company :'Toobler',
+        roles: ['Delegate', 'Speaker','Sponsor'],
+        display_role :'Speaker',
+        type : 'Online', //In-Person
+        password : process.env.attendee_createpassword
+    },
+    update_attendee:{
+        email : 'jishnu.m@gmail.com',
+        first_name :'Jishnu',
+        last_name : 'M',
+        job :'Dev',
+        company :'Toobler',
+        roles: ['Delegate', 'Speaker','Sponsor'],
+        display_role :'Speaker',
+        type : 'Online', //In-Person
+        password : process.env.attendee_createpassword
+    },
+    update_attendeedata:{
+        first_name :'Jishnu Update',
+        last_name : 'M',
+        job :'Dev update',
+        company :'Toobler',
+        roles: ['Delegate', 'Speaker','Sponsor'],
+        display_role :'Speaker',
+        type : 'In-Person', //In-Person //Online
+        
+    },
+    delete_attendee:{
+        email : 'navi.m@gmail.com',
+        first_name :'Navi',
+        last_name : 'M',
+        job :'QA',
+        company :'Toobler',
+        roles: ['Delegate', 'Speaker'],
+        display_role :'Speaker',
+        type : 'Online', //In-Person
+        password : process.env.attendee_createpassword
+    },
+    attendee_search:{
+        Name : 'binoy'
     }
 }

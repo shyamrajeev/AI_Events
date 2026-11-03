@@ -177,8 +177,7 @@ test.describe.serial('Environment Admin scenarios',()=>
                 const normalizedSearchTerm = searchTerm.toLocaleLowerCase();
                 expect(
                     name.toLocaleLowerCase().includes(normalizedSearchTerm)
-                    || email.toLocaleLowerCase().includes(normalizedSearchTerm)
-                ).toBe(true);
+                    || email.toLocaleLowerCase().includes(normalizedSearchTerm)).toBe(true);
             }
         });
     });
