@@ -172,6 +172,12 @@ export class Attendees
         await this.confirm_password.fill(process.env.attendee_updatepassword);
         await this.changepswd_savebtn.click();
    }
+   async changepswd_different()
+   {
+        await this.new_password.fill("pass123");
+        await this.confirm_password.fill("1234pass");
+        await this.changepswd_savebtn.click();
+   }
    async search_and_openactionmenu()
    {
     await this.page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.update_attendee.email);
