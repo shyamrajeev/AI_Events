@@ -3,6 +3,7 @@ import { Login } from '../pages/loginpage.js';
 import {Lobby} from '../pages/lobbypage.js';
 import {Attendees} from '../pages/attendees.js';
 import { EventsData } from '../Test_Data/Eventsdata';
+import * as allure from 'allure-js-commons'
 
 test.describe.serial('Attendee scenarios', () => 
     {    
@@ -368,7 +369,7 @@ test('TC_02: Verify add attendee button is present and admin able to access the 
         await test.step('Enter the same old password',async()=>
         {
             await attendee.changepswd_old();
-            await expect(page.getByText('This is your old password try')).toBeVisible();
+            await expect(page.getByText('This is your old password try something new')).toBeVisible();
         });
     });      
     test('TC_11: Verify the attendee password can be updated',async({page})=>
@@ -403,4 +404,36 @@ test('TC_02: Verify add attendee button is present and admin able to access the 
             await expect(page.getByText('Password updated successfully')).toBeVisible();
         });
     });      
+     test('TC_12: Verify password validation shows if added passwords do not match',async({page})=>
+    {
+     const login = new Login(page);
+        const attendee = new Attendees(page);
+        const targetEvent = EventsData.event_name_lobbyactions.event_name;
+        const lobby = new Lobby(page, targetEvent);
+        const attendeeRows = page.locator('table.stage-table tbody tr');
+        await test.step('login to the platform', async () => 
+        {
+            await login.loginURL();
+            await login.login();
+        });
+        await test.step(`Click on enter admin button`, async () => 
+        {
+            await lobby.event_admin();
+        });
+        await test.step('click on users', async()=>
+        {
+            await attendee.access_attendeepage();
+        });
+        await test.step('Access change password window', async()=>
+        {
+            await attendee.search_and_openactionmenu();
+            await page.getByRole('button', { name: 'Change Password' }).click();
+            await expect(page.getByRole('heading', { name: 'Change Password' })).toBeVisible();
+        });
+        await test.step('Enter different passwords',async()=>
+        {
+            await attendee.changepswd_different();
+            await expect(page.getByText('Passwords do not match', { exact: true })).toBeVisible();
+        });
+    });           
 });
