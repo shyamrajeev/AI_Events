@@ -1,7 +1,6 @@
 import{test,expect} from '@playwright/test'
 import { Login } from '../pages/loginpage.js';
 import {eventcreate} from '../pages/eventcreation.js';
-
 import * as allure from 'allure-js-commons'
 import { EventsData } from '../Test_Data/Eventsdata.js';
 

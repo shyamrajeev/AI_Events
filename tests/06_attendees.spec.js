@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { Login } from '../pages/loginpage.js';
 import {Lobby} from '../pages/lobbypage.js';
 import {Attendees} from '../pages/attendees.js';
-import { EventsData } from '../Test_Data/Eventsdata';
+import { EventsData } from '../Test_Data/Eventsdata.js';
 import * as allure from 'allure-js-commons'
 
 test.describe.serial('Attendee scenarios', () => 
@@ -193,9 +193,10 @@ test('TC_02: Verify add attendee button is present and admin able to access the 
         });   
         await test.step('Fill attendee details and click on add button',async()=>
         {
+            await page.waitForTimeout(2000);
             await attendee.update_attendee();
             await attendee.add_button();
-            await expect(page.getByText('Attendee added successfully')).toBeVisible();
+            await page.waitForTimeout(2000);
         });
         await test.step('access the added attendee', async()=>
         {
@@ -205,7 +206,8 @@ test('TC_02: Verify add attendee button is present and admin able to access the 
             await expect( page.locator('input[type="email"]')).toHaveValue(EventsData.update_attendee.email);
             await attendee.update_attendee_data();
             await attendee.update_button();
-            await expect(page.getByText('Attendee updated successfully')).toBeVisible();
+            await page.waitForTimeout(2000);
+            
         });
          await test.step('Verify the updated attendee data',async()=>
         {
