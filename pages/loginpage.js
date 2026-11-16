@@ -3,13 +3,13 @@ export class Login
     constructor(page)
     {
         this.page = page
-        this.emailaddress = page.getByRole('textbox', { name: 'Email Address' });
-        this. password = page.locator('input[type="password"]');
-        this.login_button =  page.getByRole('button', { name: /Login/i });
-        this.forgot_password = page.getByRole('button', { name: 'Forgot password' })
-        this.resetpassword_emailaddress = page.getByRole('textbox', { name: 'Email Address' })
-        this.sendresetlink_button =  page.getByRole('button', { name: 'Send Reset Link' })
-        this.backtologin_button = page.getByText('Back to login', { exact: true })
+        this.emailaddress = page.getByRole('textbox', { name: 'Registration email' });
+        this. password = page.locator('#password');
+        this.login_button =  page.getByRole('button', { name: 'Login' });
+        this.forgot_password =  page.getByRole('button', { name: 'Forgot password?' });
+        this.resetpassword_emailaddress = page.getByRole('textbox', { name: 'Registration email' });
+        this.sendresetlink_button =  page.getByRole('button', { name: 'Send Reset Link' });
+        this.backtologin_button = page.getByText('Back to login', { exact: true });
     }
     async loginURL()
     {

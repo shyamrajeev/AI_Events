@@ -60,7 +60,7 @@ test('TC_04 : Verify the user is able to access the reset password page', async 
         await login.forgotpassword();
     });
     await test.step('verify the page', async () => {
-        await expect(page.getByRole('heading', { name: 'Reset Password' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'Reset your password' })).toBeVisible();
     });
 });
 test('TC_05 : Verify the user is send reset password link', async ({ page }) => {
@@ -72,9 +72,6 @@ test('TC_05 : Verify the user is send reset password link', async ({ page }) => 
 
     await test.step('click on reset password option', async () => {
         await login.forgotpassword();
-    });
-    await test.step('verify the page', async () => {
-        await expect(page.getByRole('heading', { name: 'Reset Password' })).toBeVisible();
     });
     await test.step('Enter the email address and click on send reset link button', async () => {
         await login.resetpassword(process.env.user_name1);
@@ -94,9 +91,6 @@ test('TC_05 : Verify the user is send reset password link', async ({ page }) => 
 
     await test.step('click on reset password option', async () => {
         await login.forgotpassword();
-    });
-    await test.step('verify the page', async () => {
-        await expect(page.getByRole('heading', { name: 'Reset Password' })).toBeVisible();
     });
     await test.step('click on back to sign in', async () => {
         await login.backtologinpage();
