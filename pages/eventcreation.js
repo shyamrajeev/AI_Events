@@ -4,7 +4,7 @@ export class eventcreate
     constructor(page)
     {
         this.page = page;
-        this.createnewevent_button = page.getByText('Create New Event', { exact: true });
+        this.createnewevent_button = page.getByText('Create event', { exact: true })
         this.eventname = page.getByRole('textbox', { name: 'Event Title' });
         this.fromemail_address =  page.getByRole('textbox', { name: 'Emails from' });
         this.startdate = page.locator('input[type="date"]').nth(0);

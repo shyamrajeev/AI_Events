@@ -77,7 +77,7 @@ test.describe.serial('Lobby page scenarios', () => {
         });
     });
 
-    test('TC_05: Check whether the user is able to enter as admin for a specific event', async ({ page }) => {
+    test('TC_05: Check whether the user can access event admin settings from the event options menu', async ({ page }) => {
         const login = new Login(page);
         const targetEvent = EventsData.event_name_lobbyactions.event_name;
         const lobby = new Lobby(page, targetEvent);
@@ -87,9 +87,10 @@ test.describe.serial('Lobby page scenarios', () => {
             await login.login();
         });
 
-        await test.step(`Click on enter admin button`, async () => {
-            await lobby.event_admin();
-           await expect(page.getByRole('textbox', { name: 'Enter event name' })).toHaveValue(targetEvent);
+        await test.step('Enter the event as admin', async () => {
+            await lobby.event_settings(targetEvent);
+            await expect(page.getByRole('heading', { name: 'Event Details' })).toBeVisible();
+            await expect(page.getByPlaceholder('Enter event name')).toHaveValue(targetEvent);
         });
     });
 
@@ -107,6 +108,23 @@ test.describe.serial('Lobby page scenarios', () => {
             await lobby.module_setting(targetEvent);
             await expect(page.getByRole('heading', { name: 'Module Settings' })).toBeVisible();
             await expect(page.locator('p').filter({ hasText: targetEvent })).toBeVisible();
+        });
+    });
+
+    test('TC_07: Check whether the user can open event settings from the event options menu', async ({ page }) => {
+        const login = new Login(page);
+        const targetEvent = EventsData.event_name_lobbyactions.event_name;
+        const lobby = new Lobby(page, targetEvent);
+
+        await test.step('Login to the lobby', async () => {
+            await login.loginURL();
+            await login.login();
+        });
+
+        await test.step('Open event settings from the selected event card', async () => {
+            await lobby.event_settings(targetEvent);
+            await expect(page).toHaveURL(/\/admin\/event\/[^/]+\/edit/);
+            await expect(page.getByRole('heading', { name: 'Event Details' })).toBeVisible();
         });
     });
 

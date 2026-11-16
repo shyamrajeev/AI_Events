@@ -16,9 +16,9 @@ test.describe('Admin page scenarios',()=>
 
         await test.step('Login to the event and access the event as admin',async()=>
         {
-            login.loginURL();
-            login.login();
-            lobby.event_admin();
+            await login.loginURL();
+            await login.login();
+            await lobby.event_admin();
         })
          await test.step('Access the admin page',async()=>
         {
@@ -182,7 +182,7 @@ test.describe('Admin page scenarios',()=>
             await expect(page.getByText('No admins match your search.', { exact: true })).toBeVisible();
         })
     });
-test.only('TC_07: Verify the admin can be deleted',async({page})=>
+test('TC_07: Verify the admin can be deleted',async({page})=>
     {
         const targetEvent = EventsData.event_name_lobbyactions.event_name;
         const login = new Login(page);
@@ -208,7 +208,7 @@ test.only('TC_07: Verify the admin can be deleted',async({page})=>
         await test.step('Delete the admin and verify the user is deleted from the admins list',async()=>
         {
             await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete.Email);
-            const userRow = page.locator('table tbody tr').filter({has: page.getByText('david.admin@gmail.com', { exact: true })});
+            const userRow = page.locator('table tbody tr').filter({has: page.getByText(EventsData.eventadmin_delete.Email, { exact: true })});
             await page.locator('button').filter({ hasText: '⋮' }).first().click();
             await page.getByRole('button', { name: 'Delete Admin' }).click();
             await page.getByRole('button', { name: 'Delete' }).click();
@@ -237,24 +237,106 @@ test.only('TC_07: Verify the admin can be deleted',async({page})=>
         }) 
          await test.step('Add an admin',async()=>
         {
-            await admin.admindelete();
+            await admin.admindelete_chkattendeelist();
             await admin.add_Admin();
         }) 
         await test.step('Delete the admin and verify the user is deleted from the admins list',async()=>
         {
-            await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete.Email);
-            const userRow = page.locator('table tbody tr').filter({has: page.getByText('david.admin@gmail.com', { exact: true })});
+            await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete2.Email);
+            const userRow = page.locator('table tbody tr').filter({has: page.getByText(EventsData.eventadmin_delete2.Email, { exact: true })});
             await page.locator('button').filter({ hasText: '⋮' }).first().click();
             await page.getByRole('button', { name: 'Delete Admin' }).click();
             await page.getByRole('button', { name: 'Delete' }).click();
             await expect(page.getByText('Admin deleted successfully')).toBeVisible();
-            await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete.Email);
+            await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete2.Email);
             await expect(page.getByText('No admins match your search.', { exact: true })).toBeVisible();
         })
         await test.step('Verify the user is still listed under the attendee list',async()=>
         {
             await page.goto('/admin/event/21/attendees');
             
+        })
+    });
+     test('TC_09:Verify admin details can be updates',async({page})=>
+    {
+ const targetEvent = EventsData.event_name_lobbyactions.event_name;
+        const login = new Login(page);
+        const lobby = new Lobby(page, targetEvent);
+        const admin = new Admin(page);
+
+        await test.step('Login to the event and access the event as admin',async()=>
+        {
+            login.loginURL();
+            login.login();
+            lobby.event_admin();
+        })
+         await test.step('Access the admin page and click on add admin button',async()=>
+        {
+            await admin.access_adminpage();
+            await admin.button_Addadmin();
+        }) 
+         await test.step('Add an admin',async()=>
+        {
+            await admin.admin_create2update();
+            await admin.add_Admin();
+        }) 
+        await test.step('access edit admin page',async()=>
+        {
+            await admin.admin_search.fill(EventsData.eventadmin_4update.Email);
+            const userRow = page.locator('table tbody tr').filter({has: page.getByText(EventsData.eventadmin_delete2.Email, { exact: true })});
+            await page.locator('button').filter({ hasText: '⋮' }).first().click();
+            await page.getByRole('button', { name: 'Edit Profile' }).click();
+            await page.waitForTimeout(2000);
+        })
+         await test.step('update the details',async()=>
+        {
+            await admin.admin_update();
+           await admin.update();
+        });
+         await test.step('Verify the details are updated',async()=>
+        {
+            await expect(page.getByRole('textbox', { name: 'First name *' })).toHaveValue(EventsData.eventadmin_updatedata.First_name);
+            await expect(page.getByRole('textbox', { name: 'Last name *' })).toHaveValue(EventsData.eventadmin_updatedata.Last_name);
+            await expect(page.getByRole('textbox', { name: 'Job *' })).toHaveValue(EventsData.eventadmin_updatedata.Job);
+            await expect(page.getByRole('textbox', { name: 'Company *' })).toHaveValue(EventsData.eventadmin_updatedata.Company);
+        });
+    });
+test('TC_10: Verify validation message is shown while adding an admin with existing email',async({page})=>
+    {
+        const targetEvent = EventsData.event_name_lobbyactions.event_name;
+        const login = new Login(page);
+        const lobby = new Lobby(page, targetEvent);
+        const admin = new Admin(page);
+
+        await test.step('Login to the event and access the event as admin',async()=>
+        {
+            login.loginURL();
+            login.login();
+            lobby.event_admin();
+        })
+         await test.step('Access the admin page and click on add admin button',async()=>
+        {
+            await admin.access_adminpage();
+            await admin.button_Addadmin();
+        }) 
+        await test.step('fill the admin details and add admin',async()=>
+        {
+           await admin.admin_duplicate();
+           await admin.add_Admin();
+           await page.waitForTimeout(2000);
+        })
+
+        await test.step('add the same admin again',async()=>
+        {
+           
+           await admin.button_Addadmin();
+            await admin.admin_duplicate();
+            await admin.add_Admin();
+        
+        })
+        await test.step('Verify the validation message',async()=>
+        {
+           await expect(page.locator('form').getByText('Duplicate host registration for this event', { exact: true })).toBeVisible();
         })
     });
 

@@ -4,7 +4,8 @@ export class Admin
     constructor(page)
         {
             this.page = page;
-            this.admin_navigation = page.getByText('Admin', { exact: true });
+            this.profilemenu = page.locator('div.w-9.h-9.rounded-full.bg-blue-50.text-blue-700.font-bold.text-xs.flex.items-center.justify-center.border.border-blue-200.shadow-2xs.overflow-hidden.shrink-0');
+            this.admin_navigation = page.getByText('Event admins', { exact: true });
             this.envadmin_tab =  page.getByRole('button', { name: 'Environment Admins' });
             this.envadmin_searchbox = page.getByRole('textbox', { name: 'Search by name or email...' });
             this.addadmin_button = page.getByRole('button', { name: '+ Add Admin' });
@@ -22,8 +23,9 @@ export class Admin
 
         async access_EnvAdmins()
         {
+            await this.profilemenu.click();
             await this.admin_navigation.click();
-            await this.envadmin_tab.click();
+            
          }
          async addadmin_page()
          {

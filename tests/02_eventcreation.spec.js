@@ -18,7 +18,7 @@ test.describe.serial('Event creation scenarios',()=>
    });
     await test.step('Verify create new event button is present',async()=>
    {
-        await expect(page.getByText('Create New Event', { exact: true })).toBeVisible();
+        await expect(createevent.createnewevent_button).toBeVisible();
    });
     await test.step('Click on the create new button',async()=>
    {
@@ -39,10 +39,6 @@ const login = new Login(page);
    {
         await login.loginURL();
         await login.login();
-   });
-    await test.step('Verify create new event button is present',async()=>
-   {
-        await expect(page.getByText('Create New Event', { exact: true })).toBeVisible();
    });
     await test.step('Click on the create new button',async()=>
    {
@@ -70,10 +66,6 @@ test('TC_03: Verify the admin is able to create an event',async({page})=>
    {
         await login.loginURL();
         await login.login();
-   });
-    await test.step('Verify create new event button is present',async()=>
-   {
-        await expect(page.getByText('Create New Event', { exact: true })).toBeVisible();
    });
     await test.step('Click on the create new button',async()=>
    {
