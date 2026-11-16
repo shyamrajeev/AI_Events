@@ -45,10 +45,10 @@ export const EventsData = {
         company : 'Toobler update',
     },
     event_name_lobbyactions:{ // Passing the event name for the lobby actions
-        event_name : 'SETOUCH EVENTS'
+        event_name : 'DE JAZZ CENTRALE'
     },
     event_name_modulesettings:{ //Passing the event name for the module settings actions
-        event_name : 'SETOUCH EVENTS'
+        event_name : 'DE JAZZ CENTRALE'
     },
     addingsameadmin:{ // Data for checking whether the admin with the same email can be added again
         first_name : 'shyam',
@@ -244,6 +244,33 @@ speaker_delete:{ //data for adding a speaker to check delete functionality
        Role : ['Organiser','Delegate'],
        Type : 'Online',
        Password : process.env.admin_createpassword
-    }
-
+    },
+    eventadmin_4update:{ //data for adding an event admin  to check update option
+       Email : 'westwood.admin@gmail.com',
+       First_name : 'Ashley',
+       Last_name : 'Westwood',
+       Company : 'Football',
+       Job : 'Manager',
+       DP : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
+       Role : ['Organiser','Delegate'],
+       Type : 'In-Person',
+       Password : process.env.admin_createpassword
+    },
+    eventadmin_updatedata:{ //data that willbe updated
+       First_name : 'Ashley',
+       Last_name : 'Westwood Update',
+       Company : 'Football',
+       Job : 'Head Coach',
+    },
+    eventadmin_duplicate:{ //data for adding an event admin  to check duplicate validation
+       Email : 'Smith.admin@gmail.com',
+       First_name : 'Smith',
+       Last_name : 'Admin',
+       Company : 'ABC Group',
+       Job : 'Manager',
+       DP : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
+       Role : ['Organiser','Delegate'],
+       Type : 'In-Person',
+       Password : process.env.admin_createpassword
+}
 }

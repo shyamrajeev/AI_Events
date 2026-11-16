@@ -43,6 +43,13 @@ export class Lobby {
     }
 
     /**
+     * Locates the event options menu button within the specific event's card.
+     */
+    event_options_button(eventName) {
+        return this.getEventCard(eventName).getByRole('button', { name: 'Event Options' });
+    }
+
+    /**
      * Locates the "Open Module Settings" button for the specific event.
      */
     module_settings_button(eventName) {
@@ -58,12 +65,18 @@ export class Lobby {
         await this.enter_event_button(eventName).click();
     }
 
+    // async event_admin(eventName) {
+    //     await this.admin_button(eventName).click();
+    // }
+
     async event_admin(eventName) {
-        await this.admin_button(eventName).click();
+        await this.event_options_button(eventName).click();
+        await this.page.getByText('Event settings', { exact: true }).click();
     }
 
     async module_setting(eventName) {
-        await this.module_settings_button(eventName).click();
+          await this.event_options_button(eventName).click();
+        await this.page.getByText('Module settings', { exact: true }).click();
     }
     
 }

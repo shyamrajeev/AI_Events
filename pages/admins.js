@@ -19,6 +19,7 @@ export class Admin
             this.admin_company = page.getByRole('textbox', { name: 'Company *' });
             this.admin_password = page.getByPlaceholder('Min 14 characters & a symbol');
             this.admin_search = page.getByRole('textbox', { name: 'Search by name or email...' });
+            this.update_button = page.getByText('Update', { exact: true });
 
         }
 
@@ -34,6 +35,10 @@ export class Admin
     async add_Admin()
     {
        await this.add_button.click();
+    }
+    async update()
+    {
+        await this.update_button.click();
     }
     async admin_psdvalidation()
     {
@@ -102,5 +107,45 @@ export class Admin
         await this.admin_job.fill(EventsData.eventadmin_delete2.Job);
         await this.admin_company.fill(EventsData.eventadmin_delete2.Company);
         await this.admin_password.fill(EventsData.eventadmin_delete2.Password); 
+    }
+    async admin_create2update()
+    {
+        await this.admin_firstname.fill(EventsData.eventadmin_4update.First_name);
+       await this.admin_lastname.fill(EventsData.eventadmin_4update.Last_name);
+       await this.admin_roleopen.click();
+        for (const role of EventsData.eventadmin_4update.Role) 
+        {     
+            await this.page.locator('div.absolute.left-0.right-0.top-full').getByText(role, { exact: true }).click();
+        }
+        await this.admin_roleclose.click();
+        await this.admin_email.fill(EventsData.eventadmin_4update.Email);
+        await this.admin_dp.setInputFiles(EventsData.eventadmin_4update.DP);
+        await this.admin_job.fill(EventsData.eventadmin_4update.Job);
+        await this.admin_company.fill(EventsData.eventadmin_4update.Company);
+        await this.admin_password.fill(EventsData.eventadmin_4update.Password); 
+    }
+    async admin_update()
+    {
+       await this.admin_firstname.fill(EventsData.eventadmin_updatedata.First_name);
+       await this.admin_lastname.fill(EventsData.eventadmin_updatedata.Last_name);
+        await this.admin_job.fill(EventsData.eventadmin_updatedata.Job);
+        await this.admin_company.fill(EventsData.eventadmin_updatedata.Company);
+       
+    }
+    async admin_duplicate()
+    {
+        await this.admin_firstname.fill(EventsData.eventadmin_duplicate.First_name);
+       await this.admin_lastname.fill(EventsData.eventadmin_duplicate.Last_name);
+       await this.admin_roleopen.click();
+        for (const role of EventsData.eventadmin_duplicate.Role) 
+        {     
+            await this.page.locator('div.absolute.left-0.right-0.top-full').getByText(role, { exact: true }).click();
+        }
+        await this.admin_roleclose.click();
+        await this.admin_email.fill(EventsData.eventadmin_duplicate.Email);
+        await this.admin_dp.setInputFiles(EventsData.eventadmin_duplicate.DP);
+        await this.admin_job.fill(EventsData.eventadmin_duplicate.Job);
+        await this.admin_company.fill(EventsData.eventadmin_duplicate.Company);
+        await this.admin_password.fill(EventsData.eventadmin_duplicate.Password); 
     }
 }
