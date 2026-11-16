@@ -3,7 +3,6 @@ import { Login} from '../pages/loginpage';
 import { Lobby } from '../pages/lobbypage';
 import { Speaker } from '../pages/speakers';
 import { EventsData } from '../Test_Data/Eventsdata';
-import { spawn } from 'node:child_process';
 import * as allure from 'allure-js-commons'
 
 test.describe('speaker page scenarios',()=>
@@ -383,7 +382,7 @@ test.describe('speaker page scenarios',()=>
             await expect(await page.getByText('No speakers match your search.', { exact: true })).toBeVisible();
         });
     });
-    test.only('TC_11:Verify that removing a speaker only removes them from the Speaker List, while retaining them in the Attendee List.',async({page})=>
+    test('TC_11:Verify that removing a speaker only removes them from the Speaker List, while retaining them in the Attendee List.',async({page})=>
     {
         const targetEvent = EventsData.event_name_lobbyactions.event_name;
         const login = new Login(page);

@@ -201,5 +201,49 @@ speaker_delete:{ //data for adding a speaker to check delete functionality
        Bio : 'Test Speaker for delete',
        Password : 'Password@12345'
     },
+    eventadmin_psdvalidation:{ //data for adding an event admin to check the password validation
+       Email : 'david.admin@gmail.com',
+       First_name : 'David',
+       Last_name : 'admin',
+       Company : 'Hilton',
+       Job : 'Manager',
+       DP : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
+       Role : ['Organiser','Delegate'],
+       Type : 'Online',
+       Password : 'p12345'
+    },
+     eventadmin_create:{ //data for adding an event admin 
+       Email : 'david.admin@gmail.com',
+       First_name : 'David',
+       Last_name : 'admin',
+       Company : 'Hilton',
+       Job : 'Manager',
+       DP : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
+       Role : ['Organiser','Delegate'],
+       Type : 'Online',
+       Password : process.env.admin_createpassword
+    },
+     eventadmin_delete:{ //data for adding an event admin to check delete function
+       Email : 'michel.admin@gmail.com',
+       First_name : 'Michel',
+       Last_name : 'admin',
+       Company : 'KFC',
+       Job : 'SM',
+       DP : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
+       Role : ['Organiser','Delegate'],
+       Type : 'Online',
+       Password : process.env.admin_createpassword
+    },
+    eventadmin_delete2:{ //data for adding an event admin to check delete admin still list on the attendee page
+       Email : 'john.admin@gmail.com',
+       First_name : 'John',
+       Last_name : 'admin',
+       Company : 'Tesla',
+       Job : 'Designer',
+       DP : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
+       Role : ['Organiser','Delegate'],
+       Type : 'Online',
+       Password : process.env.admin_createpassword
+    }
 
 }
