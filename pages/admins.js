@@ -5,8 +5,8 @@ export class Admin
     constructor(page)
         {
             this.page = page;
-            this.users = page.locator("//button[@title='Users']//*[name()='svg']");
-            this.admin_tab = page.getByRole('button', { name: 'Admins' });
+            this.users = page.locator('span:has-text("USERS")');
+            this.admin_tab = page.locator('button:has-text("Admins")');
             this.addadmin_btn = page.getByRole('button', { name: '+ Add Admin' });
             this.add_button = page.locator(':text-is("Add")');
             this.admin_firstname = page.getByRole('textbox', { name: 'First name *' });
@@ -20,6 +20,9 @@ export class Admin
             this.admin_password = page.getByPlaceholder('Min 14 characters & a symbol');
             this.admin_search = page.getByRole('textbox', { name: 'Search by name or email...' });
             this.update_button = page.getByText('Update', { exact: true });
+            this.attendee_type = page.locator('#attendeeType');
+            this.edit = page.locator(':text-is("Edit Profile")');
+            this.delete = page.locator(':text-is("Delete Admin")');
 
         }
 
@@ -55,6 +58,8 @@ export class Admin
         await this.admin_job.fill(EventsData.eventadmin_psdvalidation.Job);
         await this.admin_company.fill(EventsData.eventadmin_psdvalidation.Company);
         await this.admin_password.fill(EventsData.eventadmin_psdvalidation.Password);
+        await this.attendee_type.click();  
+        await this.page.locator('select[name="attendeeType"]').selectOption(EventsData.eventadmin_psdvalidation.Type);
     }  
     async admin_createdetails()
     {
@@ -70,6 +75,8 @@ export class Admin
         await this.admin_dp.setInputFiles(EventsData.eventadmin_create.DP);
         await this.admin_job.fill(EventsData.eventadmin_create.Job);
         await this.admin_company.fill(EventsData.eventadmin_create.Company);
+        await this.attendee_type.click();  
+        await this.page.locator('select[name="attendeeType"]').selectOption(EventsData.eventadmin_create.Type);
         await this.admin_password.fill(EventsData.eventadmin_create.Password); 
     }
     async emptysearch()
@@ -91,6 +98,8 @@ export class Admin
         await this.admin_job.fill(EventsData.eventadmin_delete.Job);
         await this.admin_company.fill(EventsData.eventadmin_delete.Company);
         await this.admin_password.fill(EventsData.eventadmin_delete.Password); 
+        await this.attendee_type.click();  
+        await this.page.locator('select[name="attendeeType"]').selectOption(EventsData.eventadmin_delete.Type);
     }
     async admindelete_chkattendeelist()
     {
@@ -107,6 +116,8 @@ export class Admin
         await this.admin_job.fill(EventsData.eventadmin_delete2.Job);
         await this.admin_company.fill(EventsData.eventadmin_delete2.Company);
         await this.admin_password.fill(EventsData.eventadmin_delete2.Password); 
+        await this.attendee_type.click();  
+        await this.page.locator('select[name="attendeeType"]').selectOption(EventsData.eventadmin_delete2.Type);
     }
     async admin_create2update()
     {
@@ -123,6 +134,8 @@ export class Admin
         await this.admin_job.fill(EventsData.eventadmin_4update.Job);
         await this.admin_company.fill(EventsData.eventadmin_4update.Company);
         await this.admin_password.fill(EventsData.eventadmin_4update.Password); 
+        await this.attendee_type.click();  
+        await this.page.locator('select[name="attendeeType"]').selectOption(EventsData.eventadmin_4update.Type);
     }
     async admin_update()
     {
@@ -147,5 +160,7 @@ export class Admin
         await this.admin_job.fill(EventsData.eventadmin_duplicate.Job);
         await this.admin_company.fill(EventsData.eventadmin_duplicate.Company);
         await this.admin_password.fill(EventsData.eventadmin_duplicate.Password); 
+        await this.attendee_type.click();  
+        await this.page.locator('select[name="attendeeType"]').selectOption(EventsData.eventadmin_duplicate.Type);
     }
 }

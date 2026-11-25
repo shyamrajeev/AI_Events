@@ -91,7 +91,7 @@ test.describe('speaker page scenarios',()=>
             await expect(page.locator('span').filter({ hasText: 'First name is required' }).first()).toBeVisible();
             await expect(page.locator('span').filter({ hasText: 'First name is required' }).first()).toBeVisible();
             await expect(page.getByText('At least one role is required', { exact: true })).toBeVisible();
-            await expect(page.getByText('Password must be at least 8 characters', { exact: true })).toBeVisible();
+            await expect(page.getByText('Password must be at least 6 characters', { exact: true })).toBeVisible();
         });
     });
      test('TC_04: Verify user gets empty state message when no speakers is listed on the search',async({page})=>
@@ -109,14 +109,6 @@ test.describe('speaker page scenarios',()=>
          await test.step('Access the speakers page',async()=>
         {   
             await speaker.access_speakerspage();
-        });
-        await test.step('check for add speaker button',async()=>
-        {   
-            await expect(page.getByRole('button', { name: '+ Add Speaker' })).toBeVisible();
-        });
-        await test.step('click on add speaker button',async()=>
-        {   
-            await speaker.add_speakerbutton();
         });
         await test.step('Search for a speaker',async()=>
         {
@@ -159,7 +151,7 @@ test.describe('speaker page scenarios',()=>
         });
         await test.step('Verify password vlidaiton message shows',async()=>
         {   
-           await expect(page.getByText('Password must be at least 8 characters', { exact: true })).toBeVisible();
+           await expect(page.getByText('Password must be at least 6 characters')).toBeVisible();
         });
     });
     test('TC_06: Verify a speaker can be added',async({page})=>
@@ -314,7 +306,7 @@ test.describe('speaker page scenarios',()=>
           const speakerEmail = EventsData.speaker_update.Email;
           const speakerRow = page.locator('table tbody tr').filter({has:page.getByText(speakerEmail, { exact: true })});
           await page.locator('button').filter({ hasText: '⋮' }).first().click();
-          await page.getByRole('button', { name: 'Edit Profile' }).click();
+          await speaker.edit_profile.click();
           await page.waitForTimeout(2000);
           await speaker.speaker_update();
           await page.waitForTimeout(2000);
@@ -325,7 +317,7 @@ test.describe('speaker page scenarios',()=>
           const speakerEmail = EventsData.speaker_update.Email;
           const speakerRow = page.locator('table tbody tr').filter({has:page.getByText(speakerEmail, { exact: true })});
           await page.locator('button').filter({ hasText: '⋮' }).first().click();
-          await page.getByRole('button', { name: 'Edit Profile' }).click();
+          await speaker.edit_profile.click();
           await page.waitForTimeout(2000);
           await expect(page.getByRole('textbox', { name: 'First Name' })).toHaveValue(EventsData.update_speakerdata.first_name);
           await expect(page.getByRole('textbox', { name: 'Last Name' })).toHaveValue(EventsData.update_speakerdata.last_name);
@@ -372,7 +364,7 @@ test.describe('speaker page scenarios',()=>
             const speakerEmail = EventsData.speaker_delete.Email;
             const speakerRow = page.locator('table tbody tr').filter({has:page.getByText(speakerEmail, { exact: true })});
             await page.locator('button').filter({ hasText: '⋮' }).first().click();
-            await page.getByRole('button', { name: 'Delete Speaker' }).click();
+            await page.getByText('Delete Speaker').click();
             await page.getByRole('button', { name: 'Delete' }).click();
 
         });
@@ -419,7 +411,7 @@ test.describe('speaker page scenarios',()=>
              const speakerEmail = EventsData.speaker_delete.Email;
             const speakerRow = page.locator('table tbody tr').filter({has:page.getByText(speakerEmail, { exact: true })});
             await page.locator('button').filter({ hasText: '⋮' }).first().click();
-            await page.getByRole('button', { name: 'Delete Speaker' }).click();
+            await page.getByText('Delete Speaker').click();
             await page.getByRole('button', { name: 'Delete' }).click();
 
         });

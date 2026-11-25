@@ -6,8 +6,8 @@ export class Attendees
     constructor(page)
     {
         this.page = page;
-        this.users_path = page.locator("//button[@title='Users']//*[name()='svg']");
-        this.attendees_tab = page.getByRole('button', { name: 'Attendees' });
+        this.users_path = page.locator('span:has-text("USERS")');
+        this.attendees_tab = page.locator('span:has-text("Attendees")');
         this.addattendee_button = page.getByRole('button', { name: '+ Add Attendee' })
         this.attendee_search = page.getByRole('textbox', { name: 'Search by name or email...' });
         this.attendee_email = page.getByPlaceholder('Email',{exact: true});
@@ -24,8 +24,9 @@ export class Attendees
         this.new_password = page.locator('[name="password"]');
         this.confirm_password = page.locator('[name="confirmPassword"]');
         this.changepswd_savebtn = page.getByRole('button', { name: 'Save' });
-
-
+        this.editprofile = page.locator('span:has-text("Edit Profile")');
+        this.deleteattendee = page.locator('span:has-text("Delete Attendee")');
+        this.changepassword = page.locator('span:has-text("Change Password")');
     }
 
     async access_attendeepage()
@@ -48,7 +49,7 @@ export class Attendees
        // Select roles
        for (const role of EventsData.attendee_psdvalidation.roles) 
         {     
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+            await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
         }
        await this.attendee_role.click();
        await this.attendee_displayedrole.click();  
@@ -71,7 +72,7 @@ export class Attendees
        // Select roles
        for (const role of EventsData.add_attendee.roles) 
         {     
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+            await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
         }
        await this.attendee_role.click();
        await this.attendee_displayedrole.click();  
@@ -94,7 +95,7 @@ export class Attendees
        // Select roles
        for (const role of EventsData.update_attendee.roles) 
         {     
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+            await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
         }
        await this.attendee_role.click();
        await this.attendee_displayedrole.click();  
@@ -135,7 +136,7 @@ export class Attendees
        // Select roles
        for (const role of EventsData.delete_attendee.roles) 
         {     
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+            await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
         }
        await this.attendee_role.click();
        await this.attendee_displayedrole.click();  
@@ -172,11 +173,10 @@ export class Attendees
         await this.confirm_password.fill(process.env.attendee_updatepassword);
         await this.changepswd_savebtn.click();
    }
-   async changepswd_different()
+   async enter_different_passwords()
    {
         await this.new_password.fill("pass123");
         await this.confirm_password.fill("1234pass");
-        await this.changepswd_savebtn.click();
    }
    async search_and_openactionmenu()
    {

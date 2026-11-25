@@ -210,7 +210,7 @@ test('TC_07: Verify the admin can be deleted',async({page})=>
             await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete.Email);
             const userRow = page.locator('table tbody tr').filter({has: page.getByText(EventsData.eventadmin_delete.Email, { exact: true })});
             await page.locator('button').filter({ hasText: '⋮' }).first().click();
-            await page.getByRole('button', { name: 'Delete Admin' }).click();
+            await admin.delete.click();
             await page.getByRole('button', { name: 'Delete' }).click();
             await expect(page.getByText('Admin deleted successfully')).toBeVisible();
             await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete.Email);
@@ -245,7 +245,7 @@ test('TC_07: Verify the admin can be deleted',async({page})=>
             await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete2.Email);
             const userRow = page.locator('table tbody tr').filter({has: page.getByText(EventsData.eventadmin_delete2.Email, { exact: true })});
             await page.locator('button').filter({ hasText: '⋮' }).first().click();
-            await page.getByRole('button', { name: 'Delete Admin' }).click();
+            await admin.delete.click();
             await page.getByRole('button', { name: 'Delete' }).click();
             await expect(page.getByText('Admin deleted successfully')).toBeVisible();
             await page.getByRole('textbox', { name: 'Search by name or email...' }).fill(EventsData.eventadmin_delete2.Email);
@@ -285,7 +285,7 @@ test('TC_07: Verify the admin can be deleted',async({page})=>
             await admin.admin_search.fill(EventsData.eventadmin_4update.Email);
             const userRow = page.locator('table tbody tr').filter({has: page.getByText(EventsData.eventadmin_delete2.Email, { exact: true })});
             await page.locator('button').filter({ hasText: '⋮' }).first().click();
-            await page.getByRole('button', { name: 'Edit Profile' }).click();
+            await admin.edit.click();
             await page.waitForTimeout(2000);
         })
          await test.step('update the details',async()=>

@@ -223,7 +223,7 @@ test('TC_08: Verify Role type can be updated',async({page})=>
         const roleRow = page.locator('table tbody tr').filter({has: page.locator('td:first-child').getByText(roleName, { exact: true })});
         await expect(roleRow).toBeVisible();
         await roleRow.locator('td:last-child button').click();
-        await page.getByRole('button', { name: 'Edit' }).click();
+        await roletype.editrole.click();
         await page.waitForTimeout(2000);
     });   
     await test.step('Update the role and click on submit',async()=>
@@ -240,10 +240,10 @@ test('TC_08: Verify Role type can be updated',async({page})=>
         const roleRow = page.locator('table tbody tr').filter({has: page.locator('td:first-child').getByText(roleName, { exact: true })});
         await expect(roleRow).toBeVisible();
         await roleRow.locator('td:last-child button').click();
-        await page.getByRole('button', { name: 'Edit' }).click();
+        await roletype.editrole.click();
         await page.waitForTimeout(2000);
         await page.getByRole('textbox', { name: 'Display name' }).fill('Delegate');
-        await page.getByRole('button', { name: 'Submit' }).click();
+        await roletype.update_btn.click();
         await expect(page.getByText(EventsData.update_role.Name, { exact: true })).toBeVisible();
     });   
 });
@@ -268,12 +268,13 @@ test('TC_09: Verify Role type can be deleted',async({page})=>
     {
         await roletype.addrole_button();
         await roletype.delete_role();
+        await roletype.search.fill(EventsData.delete_role.Name);
         const roleName = EventsData.delete_role.Name;
         const roleRow = page.locator('table tbody tr').filter({has: page.locator('td:first-child').getByText(roleName, { exact: true })});
         await expect(roleRow).toBeVisible();
         await roleRow.locator('td:last-child button').click();
-        await page.getByRole('button', { name: 'Delete' }).click();
-        await page.getByRole('button', { name: 'Delete' }).click();
+        await roletype.delete.click();
+        await page.locator('button:has-text("Delete")').click();
     });  
     await test.step('Verify the role is deleted',async()=>
     {
@@ -281,7 +282,7 @@ test('TC_09: Verify Role type can be deleted',async({page})=>
         await expect(page.getByText('No roles found', { exact: true })).toBeVisible();
     });    
 });   
-test('TC_10: Verify Role type can be deleted',async({page})=>
+test('TC_10: Verify another role with existing role type name cannot be created',async({page})=>
 {   
     const targetEvent = EventsData.event_name_lobbyactions.event_name;
     const login = new Login(page);

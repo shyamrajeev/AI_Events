@@ -4,7 +4,7 @@ import { Admin } from '../pages/environmentadmins.js';
 import {EventsData} from '../Test_Data/Eventsdata';
 import * as allure from 'allure-js-commons'
 
-test.describe.serial('Environment Admin scenarios',()=>
+test.describe('Environment Admin scenarios',()=>
 {
     test('TC_01: Verify admin is able to access the environment admin page',async({page})=>
     {
@@ -201,9 +201,7 @@ test('TC_08: Verify empty state message is showing when the search returns no re
 
     test('TC_09: Verify the edit admin window is accessible and shows correct admin details', async ({ page }) =>
     {
-        const adminName = EventsData.admin_editprofile.admin_name;
-        const [firstName, ...lastNameParts] = adminName.split(' ');
-        const lastName = lastNameParts.join(' ');
+        const adminName = EventsData.admin_editprofile.admin_email;
         const login = new Login(page);
         const admin = new Admin(page);
 
@@ -215,13 +213,13 @@ test('TC_08: Verify empty state message is showing when the search returns no re
         });
 
         await test.step(`Open the edit window for ${adminName}`, async () => {
+            await admin.envadmin_searchbox.fill(EventsData.admin_editprofile.admin_email);
             await admin.open_edit_admin(adminName);
             await expect(page.getByRole('heading', { name: 'Edit Admin' })).toBeVisible();
         });
 
         await test.step('Verify the selected admin name in the edit form', async () => {
-            await expect(admin.admin_firstname).toHaveValue(firstName);
-            await expect(admin.admin_lastname).toHaveValue(lastName);
+            await expect(admin.admin_email).toHaveValue(adminName);
         });
     });
     test('TC_10: Verify updated admin details remain after reopening the edit window', async ({ page }) =>
@@ -252,9 +250,8 @@ test('TC_08: Verify empty state message is showing when the search returns no re
 
         await test.step('Open the created admin edit window', async () =>
         {
-            const adminRow = page.locator('table.stage-table tbody tr')
-                .filter({ hasText: EventsData.createadmin_4update.email });
-            await expect(adminRow).toContainText(fullName);
+            await admin.envadmin_searchbox.fill(EventsData.createadmin_4update.email);
+            const adminRow = page.locator('table.stage-table tbody tr').filter({ hasText: EventsData.createadmin_4update.email });
             await admin.open_edit_admin(fullName);
             await expect(page.getByRole('heading', { name: 'Edit Admin' })).toBeVisible();
         });

@@ -1,11 +1,11 @@
 export const EventsData = {
     create_event:{ //Data for creating an event
-        eventName : 'SETOUCH EVENTS',
-        fromemailaddress : 'setouchevents',
+        eventName : 'Epic Events',
+        fromemailaddress : 'epic',
         start_date : '2026-12-01',
         end_date : '2026-12-12',
         time_zone : 'Asia/Kolkata',
-        logo : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/spartanevents.webp',
+        logo : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/epic.png',
         eventcolour : '#3787d7' 
     },
     admin_psd_validation:{ //Data for checking the admin password validation while creating
@@ -18,37 +18,37 @@ export const EventsData = {
         Password : '12'
     },
     create_admin:{ //Data for admin creation
-        first_name : 'Nick',
+        first_name : 'Robert',
         last_name : 'K',
-        email : 'nick.k@gmail.com',
+        email : 'robert.k@gmail.com',
         dp : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
         job : 'QA',
         company : 'Toobler',
         Password : process.env.admin_createpassword
     },
     admin_editprofile:{ // Accessing admin edit page and checking the correct edit page is opened
-        admin_name : 'Akhil K'
+        admin_email : 'akhil.k@gmail.com'
     },
     createadmin_4update:{ //Data for creating admin for later updating that admin
-        first_name : 'jack',
+        first_name : 'Nadal',
         last_name : 'M',
-        email : 'jack.m@gmail.com',
+        email : 'nadal.m@gmail.com',
         dp : '/Users/totem/Desktop/AIEvents/Test_Data/Mediafiles/profile_avatar.avif',
         job : 'Test',
         company : 'Toobler',
         Password : process.env.admin_createpassword
     },
     admin_update:{ //Data that will be updated in the admin creating from createadmin_4update:
-        first_name : 'Jack Update',
+        first_name : 'Nadal Update',
         last_name : 'M Update',
         job : 'Test update',
         company : 'Toobler update',
     },
     event_name_lobbyactions:{ // Passing the event name for the lobby actions
-        event_name : 'DE JAZZ CENTRALE'
+        event_name : 'Epic Events'
     },
     event_name_modulesettings:{ //Passing the event name for the module settings actions
-        event_name : 'DE JAZZ CENTRALE'
+        event_name : 'Epic Events'
     },
     addingsameadmin:{ // Data for checking whether the admin with the same email can be added again
         first_name : 'shyam',
@@ -115,7 +115,7 @@ export const EventsData = {
         password : process.env.attendee_createpassword
     },
     attendee_search:{ // Attendee name passing to the search field 
-        Name : 'binoy'
+        Name : 'sreethin'
     },
     add_role:{ // Role name for adding a new role
         Name : 'QA'
