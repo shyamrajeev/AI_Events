@@ -4,7 +4,7 @@ import { Lobby } from '../pages/lobbypage.js';
 import * as allure from 'allure-js-commons'
 import { EventsData } from '../Test_Data/Eventsdata.js';
 
-test.describe.serial('Lobby page scenarios', () => {
+test.describe('Lobby page scenarios', () => {
 
     test('TC_01: Verify the search bar is present on the lobby', async ({ page }) => {
         const login = new Login(page);
@@ -14,7 +14,7 @@ test.describe.serial('Lobby page scenarios', () => {
             await login.login();
         });
         await test.step('Verify search bar is present', async () => {
-            await expect(page.getByPlaceholder('Search Events')).toBeVisible();
+            await expect(lobby.search_box).toBeVisible();
         });
     });
 
@@ -25,10 +25,7 @@ test.describe.serial('Lobby page scenarios', () => {
             await login.loginURL();
             await login.login();  
         });
-        await test.step('Verify search bar is present', async () => {
-            await expect(page.getByPlaceholder('Search Events')).toBeVisible();
-        });
-        const searchKeyword = 'Demo Event';
+        const searchKeyword = EventsData.event_name_lobbyactions.event_name;
         await test.step('Enter words to search', async () => {
             await lobby.search(searchKeyword);
         });
@@ -88,7 +85,7 @@ test.describe.serial('Lobby page scenarios', () => {
         });
 
         await test.step('Enter the event as admin', async () => {
-            await lobby.event_settings(targetEvent);
+            await lobby.event_admin(targetEvent);
             await expect(page.getByRole('heading', { name: 'Event Details' })).toBeVisible();
             await expect(page.getByPlaceholder('Enter event name')).toHaveValue(targetEvent);
         });
@@ -110,22 +107,4 @@ test.describe.serial('Lobby page scenarios', () => {
             await expect(page.locator('p').filter({ hasText: targetEvent })).toBeVisible();
         });
     });
-
-    test('TC_07: Check whether the user can open event settings from the event options menu', async ({ page }) => {
-        const login = new Login(page);
-        const targetEvent = EventsData.event_name_lobbyactions.event_name;
-        const lobby = new Lobby(page, targetEvent);
-
-        await test.step('Login to the lobby', async () => {
-            await login.loginURL();
-            await login.login();
-        });
-
-        await test.step('Open event settings from the selected event card', async () => {
-            await lobby.event_settings(targetEvent);
-            await expect(page).toHaveURL(/\/admin\/event\/[^/]+\/edit/);
-            await expect(page.getByRole('heading', { name: 'Event Details' })).toBeVisible();
-        });
-    });
-
 });

@@ -24,9 +24,9 @@ test('TC_01: Verify the admin is able to access module settings', async ({ page 
         });
     });
 
-    test('TC_02: Verify the admin is able to toggle ON/OFF Core Toggles', async ({ page }) => {
+    test('TC_02: Verify the admin is able to toggle ON the Toggle buttons', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Sample_Event';
+         const targetEvent = EventsData.event_name_modulesettings.event_name;
         const lobby = new Lobby(page, targetEvent);
         const module = new Module_setting(page);
 
@@ -54,9 +54,9 @@ test('TC_01: Verify the admin is able to access module settings', async ({ page 
             await expect(page.getByText('Module settings saved')).toBeVisible();
         });
     });
-test('TC_03: Verify the admin is able to toggle OFF the enabled toggles', async ({ page }) => {
+    test('TC_03: Verify the admin is able to toggle OFF few of the Toggle buttons', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Sample_Event';
+         const targetEvent = EventsData.event_name_modulesettings.event_name;
         const lobby = new Lobby(page, targetEvent);
         const module = new Module_setting(page);
 
@@ -73,6 +73,35 @@ test('TC_03: Verify the admin is able to toggle OFF the enabled toggles', async 
 
         await test.step('click the toggle buttons',async()=>
         {
+           await module.toggleoff();
+        });
+
+        await test.step('click on save changes button',async()=>
+        {
+           await module.savechanges();
+            await expect(page.getByText('Module settings saved')).toBeVisible();
+        });
+    });
+test('TC_04: Verify the admin is able to toggle OFF the enabled toggles', async ({ page }) => {
+        const login = new Login(page);
+       const targetEvent = EventsData.event_name_modulesettings.event_name;
+        const lobby = new Lobby(page, targetEvent);
+        const module = new Module_setting(page);
+
+        await test.step('Login to the Event', async () => {
+            await login.loginURL();
+            await login.login();
+        });
+
+        await test.step(`Click on module settings`, async () => {
+            await lobby.module_setting();
+            await expect(page.getByRole('heading', { name: 'Module Settings' })).toBeVisible();
+            await expect(page.locator('p').filter({ hasText: targetEvent })).toBeVisible();
+        });
+
+        await test.step('click the toggle buttons',async()=>
+        {
+            await module.toggleoff();
            await module.coretogglesOffIfOn();
            await module.registrationtoggleOffIfOn();
            await module.communicationtogglesOffIfOn();
@@ -83,9 +112,9 @@ test('TC_03: Verify the admin is able to toggle OFF the enabled toggles', async 
             await expect(page.getByText('Module settings saved')).toBeVisible();
         });
     });
-    test('TC_03: Verify the admin is able to toggle on the disabled toggles', async ({ page }) => {
+    test('TC_05: Verify the admin is able to toggle on the disabled toggles', async ({ page }) => {
         const login = new Login(page);
-        const targetEvent = 'Sample_Event';
+        const targetEvent = EventsData.event_name_modulesettings.event_name;
         const lobby = new Lobby(page, targetEvent);
         const module = new Module_setting(page);
 

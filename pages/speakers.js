@@ -5,8 +5,8 @@ export class Speaker
     constructor(page)
     {
         this.page=page;
-        this.users = page.locator("//button[@title='Users']//*[name()='svg']");
-        this.speakers_tab = page.getByRole('button', { name: 'Speakers' });
+        this.users = page.locator('span:has-text("USERS")');
+        this.speakers_tab =  page.locator('span:has-text("Speakers")');
         this.addspeaker_btn = page.getByRole('button', { name: '+ Add Speaker' });
         this.speaker_search = page.getByRole('textbox', { name: 'Search by name or email...' });
         this.speaker_email = page.locator('input[name="email"]');
@@ -15,12 +15,13 @@ export class Speaker
         this.speaker_company = page.getByRole('textbox', { name: 'Company Name' });
         this.speaker_job = page.getByRole('textbox', { name: 'Job Title' });
         this.fileInput = page.locator('input[type="file"]');
-        this.speaker_role = page.locator("//div[@class='multi-select-container']");
-        this.speaker_type = page.locator('[name="attendeeType"]');
+        this.speaker_role = page.locator('div.multi-select-container');
+        this.speaker_type = page.locator('select[name="attendeeType"]');
         this.speaker_bio = page.getByRole('textbox', { name: 'Enter speaker biography...' });
         this.speaker_password = page.getByPlaceholder('Temporary password');
         this.add_btn = page.getByText('Add', { exact: true });
         this.save_btn = page.getByRole('button', { name: 'Save' });
+        this.edit_profile = page.getByText('Edit Profile');
     }
     async access_speakerspage()
     {
@@ -45,7 +46,7 @@ export class Speaker
         await this.speaker_role.click();
         for (const role of EventsData.speaker_psdvalidation.Role) 
             {
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+             await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
             }
         await this.speaker_role.click();
         await this.speaker_type.click();
@@ -64,7 +65,7 @@ export class Speaker
         await this.speaker_role.click();
         for (const role of EventsData.add_speaker.Role) 
             {
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+             await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
             }
         await this.speaker_role.click();
         await this.speaker_type.click();
@@ -91,7 +92,7 @@ export class Speaker
         await this.speaker_role.click();
         for (const role of EventsData.speaker_attendeelist.Role) 
             {
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+           await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
             }
         await this.speaker_role.click();
         await this.speaker_type.click();
@@ -110,7 +111,7 @@ export class Speaker
         await this.speaker_role.click();
         for (const role of EventsData.speaker_update.Role) 
             {
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+            await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
             }
         await this.speaker_role.click();
         await this.speaker_type.click();
@@ -140,7 +141,7 @@ export class Speaker
         await this.speaker_role.click();
         for (const role of EventsData.speaker_delete.Role) 
             {
-            await this.page.locator('div[style*="cursor: pointer"]').getByText(role, { exact: true }).click();
+            await this.page.locator('div.absolute.top-full.left-0.right-0.z-50').getByText(role, { exact: true }).click();
             }
         await this.speaker_role.click();
         await this.speaker_type.click();

@@ -2,7 +2,7 @@ export class Lobby {
     constructor(page, eventName) {
         this.page = page;
         this.eventName = eventName;
-        this.search_box = page.getByRole('textbox', { name: 'Search Events' });
+        this.search_box = page.getByPlaceholder('Search events by name').first();
         this.event_titles = page.locator('h3');
     }
 

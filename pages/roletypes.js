@@ -5,18 +5,20 @@ export class RoleTypes
     constructor(page)
         {
             this.page = page;
-            this.users_icon = page.locator("//button[@title='Users']//*[name()='svg']");
-            this.roletypes = page.getByRole('button', { name: 'Role Types' });
+            this.users_icon = page.locator('span:has-text("USERS")');
+            this.roletypes = page.locator('span:has-text("Role Types")');
             this.addrole_btn = page.getByRole('button', { name: '+ Add Role' });
-            this.submit_btn = page.getByRole('button', { name: 'Submit' });
+            this.submit_btn = page.locator('button:has-text("Submit")');
             this.display_name = page.getByRole('textbox', { name: 'Display name' });
-            this.search = page.getByRole('textbox', { name: 'Search' });
+            this.search = page.getByPlaceholder('Search', { exact: true });
             this.organiser_toggle = page.getByRole('row', { name: /Organiser/ }).locator('label.switch');
             this.delegate_toggle = page.getByRole('row', { name: /Delegate/ }).locator('label.switch');
             this.sponsor_toggle = page.getByRole('row', { name: /Sponsor/ }).locator('label.switch');
             this.speaker_toggle = page.getByRole('row', { name: /Speaker/ }).locator('label.switch');
             this.exhibitor_toggle = page.getByRole('row', { name: /Exhibitor/ }).locator('label.switch');
-
+            this.editrole =  page.locator('button:has-text("Edit")');
+            this.update_btn = page.locator('button:has-text("Save")');
+            this.delete = page.getByRole('menuitem', { name: /Delete/i });
 
         }
     async access_roletypespage()
@@ -52,7 +54,7 @@ export class RoleTypes
     async update_role()
     {
         await this.display_name.fill(EventsData.update_role.Updated_Name);
-        await this.submit_btn.click();
+        await this.update_btn.click();
     }
     async delete_role()
     {

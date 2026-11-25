@@ -6,6 +6,7 @@ export class Module_setting
         this.spex_toggle = page.getByRole('switch', { name: 'Toggle Spex' });
         this.agenda_toggle = page.getByRole('switch', { name: 'Toggle Agenda' });
         this.networking_toggle = page.getByRole('switch', { name: 'Toggle Networking' });
+        this.hostedbuyer_toggle = page.getByRole('switch', { name: 'Toggle Hosted Buyer' });
         this.registration_toggle = page.getByRole('switch', { name: 'Toggle Registration' });
         this.notification_toggle = page.getByRole('switch', { name: 'Toggle Notification' });
         this.survey_toggle = page.getByRole('switch', { name: 'Toggle Survey' });
@@ -33,6 +34,7 @@ export class Module_setting
         await this.spex_toggle.click();
         await this.agenda_toggle.click();
         await this.networking_toggle.click();
+        await this.hostedbuyer_toggle.click();
     }
 
     async registrationtoggle()
@@ -45,6 +47,13 @@ export class Module_setting
         await this.notification_toggle.click();
         await this.survey_toggle.click();
         await this.emails_toggle.click();
+    }
+    async toggleoff()
+    {
+         await this.agenda_toggle.click();
+         await this.hostedbuyer_toggle.click();
+         await this.survey_toggle.click();
+
     }
 
     async savechanges()

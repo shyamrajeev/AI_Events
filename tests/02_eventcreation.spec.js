@@ -46,11 +46,14 @@ const login = new Login(page);
    });
     await test.step('Click on create event button',async()=>
    {
+    await page.waitForTimeout(2000);
        await createevent.mandatoryfieldvalidation();
+       
    });
    await test.step('verify the validation message is showing',async()=>
    {
-    await expect( page.getByText('Please enter an event name', { exact: true })).toBeVisible();
+    await page.waitForTimeout(2000);
+    await expect(page.getByText('Please enter an event name', { exact: true })).toBeVisible();
     await expect(page.getByText('Please enter a start date', { exact: true })).toBeVisible();
     await expect(page.getByText('Please enter an end date', { exact: true })).toBeVisible();
     await expect(page.getByText('Please select a timezone', { exact: true })).toBeVisible();
